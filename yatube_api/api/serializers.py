@@ -1,7 +1,7 @@
 from rest_framework import serializers
 import datetime
 
-from posts.models import Post, User, Group, Comment
+from posts.models import Post, Group, Comment
 
 
 class ModelWhithAuthorAndTimeObjectMixin(serializers.ModelSerializer):
@@ -24,7 +24,7 @@ class PostSerializer(ModelWhithAuthorAndTimeObjectMixin):
         model = Post
         fields = (
             'id', 'text', 'author', 'image', 'group', 'pub_date'
-            )
+                 )
         read_only_fields = ('pub_date',)
 
     def create(self, validated_data):
