@@ -10,7 +10,6 @@ class ModelWhithAuthorAndTimeObjectMixin(serializers.ModelSerializer):
         read_only=True
     )
 
-
     def create(self, validated_data, data_column_name, model):
         time_now = datetime.datetime.now()
         validated_data[data_column_name] = time_now
@@ -21,14 +20,12 @@ class ModelWhithAuthorAndTimeObjectMixin(serializers.ModelSerializer):
 class PostSerializer(ModelWhithAuthorAndTimeObjectMixin):
     image = serializers.ImageField(required=False)
 
-
     class Meta:
         model = Post
         fields = (
             'id', 'text', 'author', 'image', 'group', 'pub_date'
             )
         read_only_fields = ('pub_date',)
-
 
     def create(self, validated_data):
         return super().create(validated_data, 'pub_date', Post)
@@ -39,12 +36,10 @@ class CommentSerializer(ModelWhithAuthorAndTimeObjectMixin):
         read_only=True
     )
 
-
     class Meta:
         model = Comment
-        fields = ('author', 'post', 'text', 'created')
+        fields = ('id', 'author', 'post', 'text', 'created')
         read_only_fields = ('created',)
-
 
     def create(self, validated_data):
         return super().create(validated_data, 'created', Comment)
@@ -55,4 +50,4 @@ class GroupSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Group
-        fields = ('title', 'slug', 'description')
+        fields = ('id', 'title', 'slug', 'description')
