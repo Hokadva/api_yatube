@@ -22,9 +22,7 @@ class PostSerializer(ModelWhithAuthorAndTimeObjectMixin):
 
     class Meta:
         model = Post
-        fields = (
-            'id', 'text', 'author', 'image', 'group', 'pub_date'
-                 )
+        fields = ('id', 'text', 'author', 'image', 'group', 'pub_date')
         read_only_fields = ('pub_date',)
 
     def create(self, validated_data):
